@@ -2,8 +2,8 @@
 
 Team:
 
-* Jesse Zhang - Service
-* Person 2 - Which microservice?
+- Jesse Zhang - Service
+- Hamza Ahmed - Sales
 
 ## Design
 
