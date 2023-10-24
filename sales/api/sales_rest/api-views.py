@@ -19,9 +19,12 @@ def api_list_salespeople(request):
             response.status_code = 400
             return response
     elif request.method == "POST":
-        content = json.loads(request.body)
-        salespeople = Salesperson.objects.create(**content)
-        return JsonResponse(salespeople, encoder=Salesperson)
+        try:
+            content = json.loads(request.body)
+            salespeople = Salesperson.objects.create(**content)
+            return JsonResponse(salespeople, encoder=Salesperson)
+        except Salesperson.DoesNotExist:
+            return JsonResponse({"message": "Does not exist"}, status=400)
 
 
 @require_http_methods(["GET", "PUT", "DELETE"])
@@ -64,9 +67,12 @@ def api_list_customer(request):
             response.status_code = 400
             return response
     elif request.method == "POST":
-        content = json.loads(request.body)
-        customers = Customer.objects.create(**content)
-        return JsonResponse(customers, encoder=CustomerEncoder)
+        try:
+            content = json.loads(request.body)
+            customers = Customer.objects.create(**content)
+            return JsonResponse(customers, encoder=CustomerEncoder)
+        except Customer.DoesNotExist:
+            return JsonResponse({"message": "Does not exist"}, status=400)
 
 
 @require_http_methods(["GET", "DELETE", "PUT"])
@@ -80,12 +86,18 @@ def api_customer(request, id):
             response.status_code = 400
             return response
     elif request.method == "DELETE":
-        count, _ = Customer.objects.get(id=id).delete()
-        return JsonResponse({"deleted": count > 0})
+        try:
+            count, _ = Customer.objects.get(id=id).delete()
+            return JsonResponse({"deleted": count > 0})
+        except Customer.DoesNotExist:
+            return JsonResponse({"message": "Does not exist"}, status=400)
     elif request.method == "PUT":
-        content = json.loads(request.body)
-        customer = Customer.objects.get(id=id).update(**content)
-        return JsonResponse(customer, encoder=CustomerEncoder)
+        try:
+            content = json.loads(request.body)
+            customer = Customer.objects.get(id=id).update(**content)
+            return JsonResponse(customer, encoder=CustomerEncoder)
+        except Customer.DoesNotExist:
+            return JsonResponse({"message": "Does not exist"}, status=400)
 
 
 @require_http_methods(["GET", "POST", "DELETE"])
@@ -99,9 +111,15 @@ def api_sales(request, id):
             response.status_code = 400
             return response
     elif request.method == "POST":
-        content = json.loads(request.body)
-        sale = Sale.objects.create(**content)
-        return JsonResponse(sale, encoder=SaleEncoder)
+        try:
+            content = json.loads(request.body)
+            sale = Sale.objects.create(**content)
+            return JsonResponse(sale, encoder=SaleEncoder)
+        except Sale.DoesNotExist:
+            return JsonResponse({"message": "Does not exist"}, status=400)
     elif request.method == "DELETE":
-        count, _ = Sale.objects.get(id=id).delete()
-        return JsonResponse({"deleted": count > 0})
+        try:
+            count, _ = Sale.objects.get(id=id).delete()
+            return JsonResponse({"deleted": count > 0})
+        except Sale.DoesNotExist:
+            return JsonResponse({"message": "Does not exist"}, status=400)
