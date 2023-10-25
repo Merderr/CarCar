@@ -4,12 +4,12 @@ from common.json import ModelEncoder
 
 class AutomobileVOEncoder(ModelEncoder):
     model = AutomobileVO
-    properties = ["vin", "sold"]
+    properties = ["id", "vin", "sold"]
 
 
 class SalespersonEncoder(ModelEncoder):
     model = Salesperson
-    properties = ["employee_id", "first_name", "last_name"]
+    properties = ["id", "employee_id", "first_name", "last_name"]
 
 
 class CustomerEncoder(ModelEncoder):
@@ -19,7 +19,7 @@ class CustomerEncoder(ModelEncoder):
 
 class SaleEncoder(ModelEncoder):
     model = Sale
-    properties = ["automobile", "sales_person", "customer", "price"]
+    properties = ["id", "automobile", "sales_person", "customer", "price"]
     encoders = {
         "automobile": AutomobileVOEncoder(),
         "sales_person": SalespersonEncoder(),

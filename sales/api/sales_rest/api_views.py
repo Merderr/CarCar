@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
 from django.http import JsonResponse
 from .encoder import (
@@ -142,7 +141,6 @@ def api_sales(request):
             customer_id = content["customer"]
             customer = Customer.objects.get(id=customer_id)
             content["customer"] = customer
-            price = content["price"]
             sales_person = content["sales_person"]
             sales_person_id = Salesperson.objects.get(employee_id=sales_person)
             content["sales_person"] = sales_person_id
