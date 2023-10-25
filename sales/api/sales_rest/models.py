@@ -1,7 +1,6 @@
 from django.db import models
 
 
-# Create your models here.
 class Salesperson(models.Model):
     employee_id = models.CharField(max_length=255, unique=True)
     first_name = models.CharField(max_length=255)
@@ -22,7 +21,7 @@ class Customer(models.Model):
 
 
 class AutomobileVO(models.Model):
-    vin = models.CharField(max_length=5, unique=True)
+    vin = models.CharField(max_length=17, unique=True)
     sold = models.BooleanField(default=False)
 
     def __str__(self):
