@@ -48,7 +48,9 @@ def api_list_appointments(request):
     if request.method == "GET":
         appointments = Appointment.objects.all()
         return JsonResponse(
-            {"appointments": appointments},
+            {
+                "appointments": appointments,
+            },
             encoder=AppointmentDetailEncoder,
         )
     else:
@@ -106,3 +108,19 @@ def api_finish_appointment(request, pk):
         response = JsonResponse({"message": "Does not exist"})
         response.status_code = 404
         return response
+
+
+@require_http_methods(["GET"])
+def api_list_automobileVO(request):
+    if request.method == "GET":
+        try:
+            automobiles = AutomobileVO.objects.all()
+            return JsonResponse(
+                {"automobiles": automobiles},
+                encoder=AutomobileVODetailEncoder,
+            )
+        except AutomobileVO.DoesNotExist:
+            return JsonResponse(
+                {"message": "No automobiles found"},
+                status=404,
+            )
