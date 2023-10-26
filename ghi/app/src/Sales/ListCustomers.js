@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react";
 
-function ListCustomers(){
-  const [customers, setCustomers] = useState([])
+function ListCustomers() {
+  const [customers, setCustomers] = useState([]);
 
   async function loadCustomers() {
-    const response = await fetch('http://localhost:8090/api/customers/');
+    const response = await fetch("http://localhost:8090/api/customers/");
     if (response.ok) {
       const data = await response.json();
-      setCustomers(data.customers)
+      setCustomers(data.customers);
     } else {
       console.error(response);
     }
   }
 
-    useEffect(() => {
+  useEffect(() => {
     loadCustomers();
   }, []);
 
@@ -30,13 +30,13 @@ function ListCustomers(){
           </tr>
         </thead>
         <tbody>
-          {customers?.map(customer => {
+          {customers?.map((customer) => {
             return (
               <tr key={customer.id}>
-                <td>{ customer.first_name }</td>
-                <td>{ customer.last_name }</td>
-                <td>{ customer.phone_number} </td>
-                <td>{ customer.address }</td>
+                <td>{customer.first_name}</td>
+                <td>{customer.last_name}</td>
+                <td>{customer.phone_number} </td>
+                <td>{customer.address}</td>
               </tr>
             );
           })}
@@ -44,9 +44,6 @@ function ListCustomers(){
       </table>
     </>
   );
-
-
-
 }
 
-export default ListCustomers
+export default ListCustomers;

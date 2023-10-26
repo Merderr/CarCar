@@ -1,23 +1,23 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from "react";
 
-function ListAppointments () {
-  const [appointments, setAppointments] = useState([])
+function ListAppointments() {
+  const [appointments, setAppointments] = useState([]);
 
   const getData = async () => {
-    const response = await fetch('http://localhost:8080/api/appointments/')
+    const response = await fetch("http://localhost:8080/api/appointments/");
 
     if (response.ok) {
-      const data = await response.json()
-      setAppointments(data.appointments)
+      const data = await response.json();
+      setAppointments(data.appointments);
     }
-  }
+  };
 
   useEffect(() => {
-    getData()
-  }, [])
+    getData();
+  }, []);
 
   return (
-    <table className='table table-striped'>
+    <table className="table table-striped">
       <thead>
         <tr>
           <th>VIN</th>
@@ -30,22 +30,22 @@ function ListAppointments () {
         </tr>
       </thead>
       <tbody>
-        {appointments.map(appointment => {
-          if(appointment.status === 'pending')
+        {appointments.map((appointment) => {
+          if (appointment.status === "pending")
             return (
-                <tr key={appointment.id}>
+              <tr key={appointment.id}>
                 <td>{appointment.vin}</td>
                 <td>{appointment.customer}</td>
                 <td>{new Date(appointment.date_time).toDateString()}</td>
                 <td>{new Date(appointment.date_time).toLocaleTimeString()}</td>
                 <td>{appointment.technician}</td>
                 <td>{appointment.reason}</td>
-                </tr>
-            )
+              </tr>
+            );
         })}
       </tbody>
     </table>
-  )
+  );
 }
 
-export default ListAppointments
+export default ListAppointments;

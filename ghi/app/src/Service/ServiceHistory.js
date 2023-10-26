@@ -1,23 +1,23 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from "react";
 
-function ListServiceHistory () {
-  const [appointments, setAppointments] = useState([])
+function ListServiceHistory() {
+  const [appointments, setAppointments] = useState([]);
 
   const getData = async () => {
-    const response = await fetch('http://localhost:8080/api/appointments/')
+    const response = await fetch("http://localhost:8080/api/appointments/");
 
     if (response.ok) {
-      const data = await response.json()
-      setAppointments(data.appointments)
+      const data = await response.json();
+      setAppointments(data.appointments);
     }
-  }
+  };
 
   useEffect(() => {
-    getData()
-  }, [])
+    getData();
+  }, []);
 
   return (
-    <table className='table table-striped'>
+    <table className="table table-striped">
       <thead>
         <tr>
           <th>VIN</th>
@@ -30,7 +30,7 @@ function ListServiceHistory () {
         </tr>
       </thead>
       <tbody>
-        {appointments.map(appointment => {
+        {appointments.map((appointment) => {
           return (
             <tr key={appointment.id}>
               <td>{appointment.vin}</td>
@@ -41,11 +41,11 @@ function ListServiceHistory () {
               <td>{appointment.reason}</td>
               <td>{appointment.status}</td>
             </tr>
-          )
+          );
         })}
       </tbody>
     </table>
-  )
+  );
 }
 
-export default ListServiceHistory
+export default ListServiceHistory;

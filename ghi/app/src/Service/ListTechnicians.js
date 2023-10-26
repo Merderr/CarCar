@@ -1,23 +1,23 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from "react";
 
-function ListTechnicians () {
-  const [technicians, setTechnicians] = useState([])
+function ListTechnicians() {
+  const [technicians, setTechnicians] = useState([]);
 
   const getData = async () => {
-    const response = await fetch('http://localhost:8080/api/technicians/')
+    const response = await fetch("http://localhost:8080/api/technicians/");
 
     if (response.ok) {
-      const data = await response.json()
-      setTechnicians(data.technicians)
+      const data = await response.json();
+      setTechnicians(data.technicians);
     }
-  }
+  };
 
   useEffect(() => {
-    getData()
-  }, [])
+    getData();
+  }, []);
 
   return (
-    <table className='table table-striped'>
+    <table className="table table-striped">
       <thead>
         <tr>
           <th>Employee Id</th>
@@ -26,18 +26,18 @@ function ListTechnicians () {
         </tr>
       </thead>
       <tbody>
-        {technicians.map(technician => {
+        {technicians.map((technician) => {
           return (
             <tr key={technician.id}>
               <td>{technician.employee_id}</td>
               <td>{technician.first_name}</td>
               <td>{technician.last_name}</td>
             </tr>
-          )
+          );
         })}
       </tbody>
     </table>
-  )
+  );
 }
 
-export default ListTechnicians
+export default ListTechnicians;
