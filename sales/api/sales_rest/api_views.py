@@ -16,7 +16,7 @@ def api_list_salespeople(request):
         try:
             salespeople = Salesperson.objects.all()
             return JsonResponse(
-                {"Sales_People": salespeople}, encoder=SalespersonEncoder
+                {"salespeople": salespeople}, encoder=SalespersonEncoder
             )
         except Salesperson.DoesNotExist:
             response = JsonResponse({"Message": "Salesperson does not exist"})

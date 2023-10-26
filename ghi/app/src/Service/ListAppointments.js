@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from "react";
 
 function ListAppointments () {
   const [appointments, setAppointments] = useState([])
@@ -8,8 +8,8 @@ function ListAppointments () {
     const response = await fetch('http://localhost:8080/api/appointments/')
     const autosResponse = await fetch('http://localhost:8080/api/automobiles/')
     if (response.ok) {
-      const data = await response.json()
-      setAppointments(data.appointments)
+      const data = await response.json();
+      setAppointments(data.appointments);
     }
     if (autosResponse.ok) {
       const data = await autosResponse.json()
@@ -46,11 +46,11 @@ function ListAppointments () {
   });
 
   useEffect(() => {
-    getData()
-  }, [])
+    getData();
+  }, []);
 
   return (
-    <table className='table table-striped'>
+    <table className="table table-striped">
       <thead>
         <tr>
           <th>VIN</th>
@@ -67,7 +67,7 @@ function ListAppointments () {
         {updatedAppointments.map(appointment => {
           if(appointment.status === 'pending')
             return (
-                <tr key={appointment.id}>
+              <tr key={appointment.id}>
                 <td>{appointment.vin}</td>
                 <td>{appointment.vip}</td>
                 <td>{appointment.customer}</td>
@@ -84,7 +84,7 @@ function ListAppointments () {
         })}
       </tbody>
     </table>
-  )
+  );
 }
 
-export default ListAppointments
+export default ListAppointments;

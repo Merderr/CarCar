@@ -12,6 +12,7 @@ function ListServiceHistory () {
   const getData = async () => {
     const response = await fetch('http://localhost:8080/api/appointments/')
     const autosResponse = await fetch('http://localhost:8080/api/automobiles/')
+
     if (response.ok) {
       const data = await response.json()
       setAppointments(data.appointments)
@@ -23,18 +24,16 @@ function ListServiceHistory () {
   }
 
   const updatedAppointments = appointments.map(appointment => {
-    const isVip = autos.some(item => item.vin === appointment.vin);
+    const isVip = autos.some(item => item.vin === appointment.vin)
     return {
       ...appointment,
-      vip: isVip ? "yes" : "no"
-    };
-  });
+      vip: isVip ? 'yes' : 'no'
+    }
+  })
 
-  const filteredAppointments = updatedAppointments.filter(
-      (appointment) => appointment.vin.includes(searchVal)
+  const filteredAppointments = updatedAppointments.filter(appointment =>
+    appointment.vin.includes(searchVal)
   )
-
-
 
   useEffect(() => {
     getData()
@@ -42,11 +41,12 @@ function ListServiceHistory () {
 
   return (
     <div>
-       <h1 className="mb-3">Service History</h1>
-       <input value={searchVal}
-              onChange={handleSearchChange}
-              placeholder='Search by VIN...'>
-        </input>
+      <h1 className='mb-3'>Service History</h1>
+      <input
+        value={searchVal}
+        onChange={handleSearchChange}
+        placeholder='Search by VIN...'
+      ></input>
       <table className='table table-striped'>
         <thead>
           <tr>
