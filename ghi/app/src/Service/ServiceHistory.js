@@ -12,7 +12,6 @@ function ListServiceHistory () {
   const getData = async () => {
     const response = await fetch('http://localhost:8080/api/appointments/')
     const autosResponse = await fetch('http://localhost:8080/api/automobiles/')
-
     if (response.ok) {
       const data = await response.json()
       setAppointments(data.appointments)
