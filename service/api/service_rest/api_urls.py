@@ -1,5 +1,13 @@
 from django.urls import path
-from .api_views import api_list_technicians, api_delete_technician, api_list_appointments, api_delete_appointment, api_cancel_appointment, api_finish_appointment, api_list_automobileVO
+from .api_views import (
+    api_list_technicians,
+    api_delete_technician,
+    api_list_appointments,
+    api_delete_appointment,
+    api_cancel_appointment,
+    api_finish_appointment,
+    api_list_automobileVO,
+)
 
 urlpatterns = [
     path("technicians/", api_list_technicians, name="api_list_technicians"),
