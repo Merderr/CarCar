@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react'
 
 function ListAppointments () {
   const [appointments, setAppointments] = useState([])
@@ -8,8 +8,8 @@ function ListAppointments () {
     const response = await fetch('http://localhost:8080/api/appointments/')
     const autosResponse = await fetch('http://localhost:8080/api/automobiles/')
     if (response.ok) {
-      const data = await response.json();
-      setAppointments(data.appointments);
+      const data = await response.json()
+      setAppointments(data.appointments)
     }
     if (autosResponse.ok) {
       const data = await autosResponse.json()
@@ -17,40 +17,46 @@ function ListAppointments () {
     }
   }
 
-  async function handleCancel(appointmentId) {
+  async function handleCancel (appointmentId) {
     const fetchOptions = {
-        method: "PUT"
+      method: 'PUT'
     }
-    const request = await fetch(`http://localhost:8080/api/appointments/${appointmentId}/cancel/`, fetchOptions)
+    const request = await fetch(
+      `http://localhost:8080/api/appointments/${appointmentId}/cancel/`,
+      fetchOptions
+    )
     if (request.ok) {
-        getData()
+      getData()
     }
   }
 
-  async function handleFinish(appointmentId) {
+  async function handleFinish (appointmentId) {
     const fetchOptions = {
-        method: "PUT"
+      method: 'PUT'
     }
-    const request = await fetch(`http://localhost:8080/api/appointments/${appointmentId}/finish/`, fetchOptions)
+    const request = await fetch(
+      `http://localhost:8080/api/appointments/${appointmentId}/finish/`,
+      fetchOptions
+    )
     if (request.ok) {
-        getData()
+      getData()
     }
   }
 
   const updatedAppointments = appointments.map(appointment => {
-    const isVip = autos.some(item => item.vin === appointment.vin);
+    const isVip = autos.some(item => item.vin === appointment.vin)
     return {
       ...appointment,
-      vip: isVip ? "yes" : "no"
-    };
-  });
+      vip: isVip ? 'yes' : 'no'
+    }
+  })
 
   useEffect(() => {
-    getData();
-  }, []);
+    getData()
+  }, [])
 
   return (
-    <table className="table table-striped">
+    <table className='table table-striped'>
       <thead>
         <tr>
           <th>VIN</th>
@@ -65,7 +71,7 @@ function ListAppointments () {
       </thead>
       <tbody>
         {updatedAppointments.map(appointment => {
-          if(appointment.status === 'pending')
+          if (appointment.status === 'pending')
             return (
               <tr key={appointment.id}>
                 <td>{appointment.vin}</td>
@@ -76,15 +82,25 @@ function ListAppointments () {
                 <td>{appointment.technician}</td>
                 <td>{appointment.reason}</td>
                 <td>
-                  <button className="btn btn-danger"onClick={() => handleCancel(appointment.id)}>Cancel</button>
-                  <button className="btn btn-success"onClick={() => handleFinish(appointment.id)}>Finish</button>
+                  <button
+                    className='btn btn-danger'
+                    onClick={() => handleCancel(appointment.id)}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    className='btn btn-success'
+                    onClick={() => handleFinish(appointment.id)}
+                  >
+                    Finish
+                  </button>
                 </td>
-                </tr>
+              </tr>
             )
         })}
       </tbody>
     </table>
-  );
+  )
 }
 
-export default ListAppointments;
+export default ListAppointments

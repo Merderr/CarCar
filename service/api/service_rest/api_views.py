@@ -33,7 +33,7 @@ def api_list_technicians(request):
 @require_http_methods(["DELETE"])
 def api_delete_technician(request, pk):
     count, _ = Technician.objects.filter(id=pk).delete()
-    if count>0:
+    if count > 0:
         code = 200
     else:
         code = 404
@@ -66,7 +66,7 @@ def api_list_appointments(request):
 @require_http_methods(["DELETE"])
 def api_delete_appointment(request, pk):
     count, _ = Appointment.objects.filter(id=pk).delete()
-    if count>0:
+    if count > 0:
         code = 200
     else:
         code = 404
