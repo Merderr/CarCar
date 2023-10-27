@@ -40,8 +40,6 @@ function VehicleModelForm() {
 
     const model = await fetch(vehicleModelUrl, fetchConfig);
     if (model.ok) {
-      const newModel = await model.json();
-      console.log(newModel);
       setName("");
       setPicture("");
       setManufacturer("");

@@ -40,7 +40,6 @@ function SaleForm() {
 
   const loadCustomers = async () => {
     const response = await fetch("http://localhost:8090/api/customers/");
-    console.log(response);
     if (response.ok) {
       const data = await response.json();
       setCustomers(data.customers);
@@ -49,7 +48,6 @@ function SaleForm() {
 
   async function loadSalespersons() {
     const response = await fetch("http://localhost:8090/api/salespeople/");
-    console.log(response);
     if (response.ok) {
       const data = await response.json();
       setSalespersons(data.salespeople);

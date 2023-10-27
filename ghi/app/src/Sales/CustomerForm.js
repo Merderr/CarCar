@@ -25,9 +25,6 @@ function CustomerForm() {
 
     const customer = await fetch(customerUrl, fetchConfig);
     if (customer.ok) {
-      const newCustomer = await customer.json();
-      console.log(newCustomer);
-
       setFirstName("");
       setLastName("");
       setAddress("");
